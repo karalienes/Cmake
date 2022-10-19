@@ -1,0 +1,1 @@
+/usr/bin/c++     CMakeFiles/CMAKE_TUTORIAL.dir/main.cpp.o  -o CMAKE_TUTORIAL   -L/home/karali/Cmake_Tutorial/Adder  -Wl,-rpath,/home/karali/Cmake_Tutorial/Adder Adder/libAdderLib.a 

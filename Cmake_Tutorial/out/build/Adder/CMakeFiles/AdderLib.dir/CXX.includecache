@@ -1,0 +1,14 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/karali/Cmake_Tutorial/Adder/adder.cpp
+adder.h
+/home/karali/Cmake_Tutorial/Adder/adder.h
+
+/home/karali/Cmake_Tutorial/Adder/adder.h
+

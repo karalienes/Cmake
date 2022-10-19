@@ -1,0 +1,2 @@
+/usr/bin/ar qc libAdderLib.a  CMakeFiles/AdderLib.dir/adder.cpp.o
+/usr/bin/ranlib libAdderLib.a
