@@ -1,6 +1,0 @@
-/home/karali/Cmake_Tutorial/out/build/CMakeFiles/rebuild_cache.dir
-/home/karali/Cmake_Tutorial/out/build/CMakeFiles/edit_cache.dir
-/home/karali/Cmake_Tutorial/out/build/CMakeFiles/CMAKE_TUTORIAL.dir
-/home/karali/Cmake_Tutorial/out/build/Adder/CMakeFiles/rebuild_cache.dir
-/home/karali/Cmake_Tutorial/out/build/Adder/CMakeFiles/edit_cache.dir
-/home/karali/Cmake_Tutorial/out/build/Adder/CMakeFiles/AdderLib.dir
