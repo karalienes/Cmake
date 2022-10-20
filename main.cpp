@@ -1,14 +1,18 @@
 #include<iostream>
 #include "adder.h"
 #include "glfw3.h"
+#include <CMAKE_TUTORIAL_Config.h>
 using namespace std;
 
-int main(){
+int main(int argc, char * argv[]){
 
 
     cout<<"KARALİ";
 
     cout<< "\n" <<add(72.1f,73.8f) << '\n';
+
+    cout<<argv[0]<<" Version "<< CMAKE_TUTORIAL_VERSION_MAJOR << "." << CMAKE_TUTORIAL_VERSION_MINOR << "\n";
+    // version console yazılması için gerekli olan source code 
 
     GLFWwindow *window;
 

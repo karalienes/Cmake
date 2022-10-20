@@ -1,0 +1,3 @@
+#define CMAKE_TUTORIAL_VERSION_MAJOR @CMAKE_TUTORIAL_VERSION_MAJOR@
+#define CMAKE_TUTORIAL_VERSION_MINOR @CMAKE_TUTORIAL_VERSION_MINOR@
+// Buradaki amaç ise version 1.0 durumda 1 major .0 kısmı mınor kısmıdır bunların tanımlanma işlemini yaptık
