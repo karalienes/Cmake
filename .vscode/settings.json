@@ -3,5 +3,6 @@
     "files.associations": {
         "iostream": "cpp",
         "*.in": "cpp"
-    }
+    },
+    "C_Cpp.dimInactiveRegions": false
 }

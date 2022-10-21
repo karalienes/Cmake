@@ -1,3 +1,3 @@
 #! /bin/sh
 
-cmake -D GLFW_BUILD_DOCS=OFF -S . -B out/build
+cmake -D GLFW_BUILD_DOCS=OFF -DUSE_ADDER=ON -S . -B out/build

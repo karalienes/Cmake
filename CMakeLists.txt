@@ -4,8 +4,24 @@ cmake_minimum_required(VERSION 3.16.3...3.19.0)
 project(CMAKE_TUTORIAL VERSION 1.2.2)
 #proje ismi ve version numarası
 
+
+option(USE_ADDER "A simple library for adding 2 floats" ON)
+#Burada eklediğim yeni option ile USE_ADDER on of durumuna göre lib açıp kapatma işlemi yapabiliriz.
+if(USE_ADDER)   
+    add_subdirectory(Adder)
+    
+    list(APPEND EXTRA_LIB_DIRS Adder)
+    list(APPEND EXTRA_INCLUDE_DIRS "${PROJECT_SOURCE_DIR}/Adder")
+    list(APPEND EXTRA_LINKS AdderLib)
+    #Burada opsiyon olarak eklenen Adder list içerisinde tutuyoruz ardından gerekli durumda ekleme işlemi yapıyoruz.
+endif()
+
 configure_file(CMAKE_TUTORIAL_Config.h.in CMAKE_TUTORIAL_Config.h)
 #Burda bir confugire oluşturuyoruz. buradaki amac proje ismi ile aynı isimde olması gerekmektedir.
+
+
+add_executable(${PROJECT_NAME} main.cpp)
+#projeye çalışır bir blok ekleme işlemi yapar ilk olarak projenın ısmı ardından blok eklenecektır.
 
 #### DOWNLOAD ALL THE SUBMODULES
 
@@ -31,10 +47,7 @@ message(STATUS "CMAKE_C_COMPILER: ${CMAKE_C_COMPILER}")
 message(STATUS "CMAKE_PROJECT_VERSION = ${CMAKE_PROJECT_VERSION}")
 #proje versionu ekrana yazar
 
-add_executable(${PROJECT_NAME} main.cpp)
-#projeye çalışır bir blok ekleme işlemi yapar ilk olarak projenın ısmı ardından blok eklenecektır.
 
-add_subdirectory(Adder)
 add_subdirectory(external/glfw)
 #Adder dosyasındaki cmake cekmek icin yapılan tanımlamadır.
 #Burda amaç yolu verilen libi çekme işlemidir.
@@ -47,21 +60,23 @@ target_include_directories(${PROJECT_NAME} PUBLIC ${PROJECT_BINARY_DIR})
 
 
 target_include_directories(${PROJECT_NAME} 
-    PUBLIC Adder 
+    #PUBLIC Adder 
     PUBLIC external/glfw/include/GLFW
+    ${EXTRA_INCLUDE_DIRS}
     )
 #Bu şekilde tanımlama yaparsak #include<aader.h> şeklinde yazmamıza musade edecektir ama bu tanımlamayı yapmazsak
 # #include<Adder/adder.h> şeklinde tanımlama yapmamız gerekmektedir.
 
 target_link_directories(${PROJECT_NAME} 
-    PRIVATE Adder
+    #PRIVATE Adder
     PRIVATE external/glfw/src
+    ${EXTRA_LIB_DIRS}
     )
 #Bunun olmasının sebebi bazı dosyaları import ederken bir bir include birde lib kısmının olmasıdır bunun ıcın buna gerek vardır.
 #Bunlar tamamen source kodda olacaktır.
 
 
-target_link_libraries(${PROJECT_NAME} AdderLib glfw)
+target_link_libraries(${PROJECT_NAME} ${EXTRA_LINKS} glfw)
 #Adder içinde tanımlanmış olan lib çekme işlemi yapmaktadır bunun içinde add_subdirectory zaten Adder eklenmiştir.
 #Adder içinde add_library tanımlanmıs olan AdderLib yazmak yeterli olacaktır.
 #add_library() içinde yazanlar yazılmalıdır burda yoksa hata verecektır :)
