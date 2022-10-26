@@ -23,6 +23,21 @@ configure_file(CMAKE_TUTORIAL_Config.h.in CMAKE_TUTORIAL_Config.h)
 add_executable(${PROJECT_NAME} main.cpp)
 #projeye çalışır bir blok ekleme işlemi yapar ilk olarak projenın ısmı ardından blok eklenecektır.
 
+find_library(myglewlib glew NAMES glew2 GLEW GLEW2 DOC "glew library")
+#Burada ilk değişken verdiğimiz isimdir ikinci gerçek adıdır.
+#NAMES olarak adlandırılan 3 adet örnek isimlerdir. Yani onlar olmazsa onda bulabilecektir.
+#Doc ile belgelendirme işlemi yapılabilir.
+
+if(${myglewlib} STREQUAL myglewlib-NOTFOUND)
+    message(FATAL_ERROR "no glew, sad day")
+else()
+    message(STATUS "glew found! as ${myglewlib}")
+endif()
+# Buradan libin olup olmadığını bile getirebiliriz. Yani kontrol edebiliriz.
+
+
+
+
 #### DOWNLOAD ALL THE SUBMODULES
 
 find_package(Git QUIET)
@@ -76,7 +91,24 @@ target_link_directories(${PROJECT_NAME}
 #Bunlar tamamen source kodda olacaktır.
 
 
-target_link_libraries(${PROJECT_NAME} ${EXTRA_LINKS} glfw)
+target_link_libraries(${PROJECT_NAME} ${EXTRA_LINKS} glfw ${myglewlib})
 #Adder içinde tanımlanmış olan lib çekme işlemi yapmaktadır bunun içinde add_subdirectory zaten Adder eklenmiştir.
 #Adder içinde add_library tanımlanmıs olan AdderLib yazmak yeterli olacaktır.
 #add_library() içinde yazanlar yazılmalıdır burda yoksa hata verecektır :)
+
+
+install(TARGETS ${PROJECT_NAME} DESTINATION bin)
+install(FILES "${PROJECT_BINARY_DIR}/CMAKE_TUTORIAL_Config.h" DESTINATION include)
+#installarını oluşturuyoruz her library'nın bir adet lib bir adette include dosyaları bulunmak zorundadır.
+
+
+include(InstallRequiredSystemLibraries)
+set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/License.txt")
+set(CPACK_PACKAGE_VERSION_MAJOR "${Tutorial_VERSION_MAJOR}")
+set(CPACK_PACKAGE_VERSION_MINOR "${Tutorial_VERSION_MINOR}")
+include(CPack)
+
+# Bu eklediğimiz satırlar ile projenin mac ve windowsta kurulmasına sebeb olacaktır. 
+
+
+
